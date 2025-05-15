@@ -1,0 +1,38 @@
+<div class="login-container">
+  <h2>Login</h2>
+
+  <div class="demo-credentials">
+    <p><strong>Demo Credentials:</strong></p>
+    <p>Email: testuser&#64;example.com</p>
+    <p>Password: Test&#64;1234</p>
+    <button type="button" (click)="fillDemoCredentials()" class="demo-btn">Fill Demo Credentials</button>
+    <button type="button" (click)="testDirectLogin()" class="demo-btn">Test Direct Login</button>
+  </div>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" name="email" [(ngModel)]="loginData.email" required />
+    </div>
+
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" name="password" [(ngModel)]="loginData.password" required />
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      <span class="error-icon" *ngIf="errorMessage === 'Logging in...'">⏳</span>
+      <span class="error-icon" *ngIf="errorMessage !== 'Logging in...'">⚠️</span>
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Login</button>
+      <a (click)="forgotPassword()" class="forgot-password">Forgot Password?</a>
+    </div>
+
+    <div class="register-link">
+      <p>New user? <a routerLink="/register">Create an account</a></p>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login API</title>
+    <script>
+        function testLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            fetch('http://localhost:5200/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Login failed: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('result').textContent = 'Login successful! Token: ' + data.token;
+                console.log('Login response:', data);
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+                console.error('Login error:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Test Login API</h1>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" value="testuser@example.com">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" value="Test@1234">
+    </div>
+    <button onclick="testLogin()">Login</button>
+    <div id="result" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc;"></div>
+</body>
+</html>

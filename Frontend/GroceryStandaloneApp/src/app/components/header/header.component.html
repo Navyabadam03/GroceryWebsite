@@ -1,0 +1,8 @@
+<nav>
+    <a routerLink="/products">Products</a>
+    <span style="float: right;">
+      <button *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</button>
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/login">Login</a>
+    </span>
+  </nav>
+  

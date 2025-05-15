@@ -1,0 +1,32 @@
+<header>
+  <nav>
+    <a routerLink="/home" class="logo">Grocery Store</a>
+
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/products">Products</a>
+    </div>
+
+    <div class="nav-actions">
+      <a *ngIf="authService.isLoggedIn()" routerLink="/cart" class="cart-icon">
+        <span class="material-icons">shopping_cart</span>
+        <span class="cart-badge" *ngIf="isBrowser && cartItemCount > 0">{{ cartItemCount }}</span>
+      </a>
+
+      <a *ngIf="authService.isLoggedIn()" routerLink="/profile" class="profile-link">
+        <span class="material-icons">person</span>
+      </a>
+
+      <button *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</button>
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/login" class="login-btn">Login</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>&copy; 2023 Grocery Store</p>
+</footer>

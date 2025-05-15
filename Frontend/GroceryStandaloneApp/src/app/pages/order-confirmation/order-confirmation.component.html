@@ -1,0 +1,37 @@
+<div class="confirmation-container">
+  <div class="confirmation-card">
+    <div class="success-icon">✓</div>
+    <h1>Order Confirmed!</h1>
+    <p class="thank-you">Thank you for your purchase</p>
+    
+    <div class="order-details">
+      <div class="detail-row">
+        <span class="label">Order Number:</span>
+        <span class="value">#{{ orderNumber }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Estimated Delivery:</span>
+        <span class="value">{{ estimatedDelivery }}</span>
+      </div>
+    </div>
+    
+    <div class="shipping-address">
+      <h3>Shipping Address</h3>
+      <p>{{ address.fullName }}</p>
+      <p>{{ address.addressLine1 }}</p>
+      <p *ngIf="address.addressLine2">{{ address.addressLine2 }}</p>
+      <p>{{ address.city }}, {{ address.state }} {{ address.zipCode }}</p>
+      <p>{{ address.country }}</p>
+      <p>{{ address.phoneNumber }}</p>
+    </div>
+    
+    <p class="confirmation-message">
+      We've sent a confirmation email with order details to your email address.
+    </p>
+    
+    <div class="action-buttons">
+      <a routerLink="/products" class="continue-shopping-btn">Continue Shopping</a>
+      <a routerLink="/home" class="home-btn">Back to Home</a>
+    </div>
+  </div>
+</div>

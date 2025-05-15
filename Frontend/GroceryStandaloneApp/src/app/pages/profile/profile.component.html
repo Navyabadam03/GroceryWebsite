@@ -1,0 +1,96 @@
+<div class="profile-container">
+  <h1>My Profile</h1>
+  
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+  
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <!-- View Mode -->
+  <div *ngIf="!editMode && !changePassword" class="profile-view">
+    <div class="profile-section">
+      <h2>Personal Information</h2>
+      <div class="profile-field">
+        <span class="field-label">Name:</span>
+        <span class="field-value">{{ user.name }}</span>
+      </div>
+      <div class="profile-field">
+        <span class="field-label">Email:</span>
+        <span class="field-value">{{ user.email }}</span>
+      </div>
+      <div class="profile-field" *ngIf="user.phone">
+        <span class="field-label">Phone:</span>
+        <span class="field-value">{{ user.phone }}</span>
+      </div>
+      <div class="profile-field" *ngIf="user.address">
+        <span class="field-label">Address:</span>
+        <span class="field-value">{{ user.address }}</span>
+      </div>
+    </div>
+    
+    <div class="profile-actions">
+      <button (click)="toggleEditMode()" class="edit-btn">Edit Profile</button>
+      <button (click)="toggleChangePassword()" class="password-btn">Change Password</button>
+    </div>
+  </div>
+  
+  <!-- Edit Mode -->
+  <div *ngIf="editMode" class="profile-edit">
+    <h2>Edit Profile</h2>
+    <form (ngSubmit)="updateProfile()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" [(ngModel)]="user.name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="user.email" required disabled>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" [(ngModel)]="user.phone">
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" [(ngModel)]="user.address" rows="3"></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="save-btn">Save Changes</button>
+        <button type="button" (click)="toggleEditMode()" class="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Change Password Mode -->
+  <div *ngIf="changePassword" class="profile-edit">
+    <h2>Change Password</h2>
+    <form (ngSubmit)="updatePassword()">
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword" name="currentPassword" [(ngModel)]="currentPassword" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">Confirm New Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="save-btn">Update Password</button>
+        <button type="button" (click)="toggleChangePassword()" class="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

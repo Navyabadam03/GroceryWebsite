@@ -1,0 +1,129 @@
+<div class="address-container">
+  <h1>Shipping Address</h1>
+  
+  <div class="address-content">
+    <div class="address-form">
+      <form (ngSubmit)="onSubmit()" #addressForm="ngForm">
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input 
+            type="text" 
+            id="fullName" 
+            name="fullName" 
+            [(ngModel)]="address.fullName" 
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="addressLine1">Address Line 1 *</label>
+          <input 
+            type="text" 
+            id="addressLine1" 
+            name="addressLine1" 
+            [(ngModel)]="address.addressLine1" 
+            required
+            placeholder="Street address, P.O. box, company name"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="addressLine2">Address Line 2</label>
+          <input 
+            type="text" 
+            id="addressLine2" 
+            name="addressLine2" 
+            [(ngModel)]="address.addressLine2"
+            placeholder="Apartment, suite, unit, building, floor, etc."
+          >
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City *</label>
+            <input 
+              type="text" 
+              id="city" 
+              name="city" 
+              [(ngModel)]="address.city" 
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="state">State/Province *</label>
+            <input 
+              type="text" 
+              id="state" 
+              name="state" 
+              [(ngModel)]="address.state" 
+              required
+            >
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="zipCode">Zip/Postal Code *</label>
+            <input 
+              type="text" 
+              id="zipCode" 
+              name="zipCode" 
+              [(ngModel)]="address.zipCode" 
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="country">Country *</label>
+            <input 
+              type="text" 
+              id="country" 
+              name="country" 
+              [(ngModel)]="address.country" 
+              required
+            >
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number *</label>
+          <input 
+            type="tel" 
+            id="phoneNumber" 
+            name="phoneNumber" 
+            [(ngModel)]="address.phoneNumber" 
+            required
+          >
+        </div>
+        
+        <div class="form-actions">
+          <button 
+            type="submit" 
+            class="continue-btn" 
+            [disabled]="!isFormValid()"
+          >
+            Continue to Payment
+          </button>
+          <a routerLink="/cart" class="back-btn">Back to Cart</a>
+        </div>
+      </form>
+    </div>
+    
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div class="summary-row">
+        <span>Subtotal:</span>
+        <span>${{ isBrowser ? cartTotal.toFixed(2) : cartTotal }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping:</span>
+        <span>Free</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total:</span>
+        <span>${{ isBrowser ? cartTotal.toFixed(2) : cartTotal }}</span>
+      </div>
+    </div>
+  </div>
+</div>

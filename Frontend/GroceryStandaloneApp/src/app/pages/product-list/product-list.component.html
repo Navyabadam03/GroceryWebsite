@@ -1,0 +1,32 @@
+<div class="products-container">
+  <h1>Our Products</h1>
+
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading products...</p>
+  </div>
+
+  <div class="product-grid" *ngIf="!loading && products.length > 0">
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-image">
+        <img [src]="product.imageUrl" alt="{{ product.name }}"
+             onerror="this.src='https://via.placeholder.com/300x200?text=Product+Image'" />
+      </div>
+      <div class="product-details">
+        <h3>{{ product.name }}</h3>
+        <p class="description">{{ product.description }}</p>
+        <p class="price">${{ isBrowser && typeof product.price === 'number' ? product.price.toFixed(2) : product.price }}</p>
+        <div class="actions">
+          <button (click)="addToCart(product)" class="add-cart-btn">
+            <span class="material-icons">shopping_cart</span> Add to Cart
+          </button>
+          <a [routerLink]="['/products', product.id]" class="details-btn">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && products.length === 0" class="no-products">
+    <p>No products available.</p>
+  </div>
+</div>

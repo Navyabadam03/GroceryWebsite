@@ -1,0 +1,89 @@
+<div class="checkout-container">
+  <h1>Checkout</h1>
+  
+  <!-- Order Confirmation -->
+  <div *ngIf="orderPlaced" class="order-confirmation">
+    <div class="success-icon">✓</div>
+    <h2>Order Placed Successfully!</h2>
+    <p>Your order number is: <strong>{{ orderNumber }}</strong></p>
+    <p>Thank you for your purchase.</p>
+    <a routerLink="/products" class="continue-btn">Continue Shopping</a>
+  </div>
+  
+  <!-- Checkout Form -->
+  <div *ngIf="!orderPlaced" class="checkout-content">
+    <div class="checkout-form">
+      <h2>Shipping Information</h2>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" [(ngModel)]="checkoutForm.fullName" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="checkoutForm.email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" id="address" [(ngModel)]="checkoutForm.address" required>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" [(ngModel)]="checkoutForm.city" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="zipCode">Zip Code</label>
+          <input type="text" id="zipCode" [(ngModel)]="checkoutForm.zipCode" required>
+        </div>
+      </div>
+      
+      <h2>Payment Information</h2>
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" [(ngModel)]="checkoutForm.cardNumber" placeholder="1234 5678 9012 3456" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="cardName">Name on Card</label>
+        <input type="text" id="cardName" [(ngModel)]="checkoutForm.cardName" required>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cardExpiry">Expiry Date</label>
+          <input type="text" id="cardExpiry" [(ngModel)]="checkoutForm.cardExpiry" placeholder="MM/YY" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="cardCvv">CVV</label>
+          <input type="text" id="cardCvv" [(ngModel)]="checkoutForm.cardCvv" required>
+        </div>
+      </div>
+      
+      <button (click)="placeOrder()" [disabled]="!isFormValid()" class="place-order-btn">Place Order</button>
+      <a routerLink="/cart" class="back-btn">Back to Cart</a>
+    </div>
+    
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      
+      <div class="cart-items">
+        <div class="cart-item" *ngFor="let item of cartItems">
+          <div class="item-info">
+            <span>{{ item.product.name }} × {{ item.quantity }}</span>
+            <span>${{ isBrowser ? (item.product.price * item.quantity).toFixed(2) : (item.product.price * item.quantity) }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="summary-total">
+        <span>Total:</span>
+        <span>${{ isBrowser ? cartTotal.toFixed(2) : cartTotal }}</span>
+      </div>
+    </div>
+  </div>
+</div>
